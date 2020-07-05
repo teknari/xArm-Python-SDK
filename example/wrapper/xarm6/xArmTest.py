@@ -44,11 +44,11 @@ def PrintPosition():
 
 
 
-arm.reset(wait=True)
+# arm.reset(wait=True)
 
-speed = 50
+speed = 100
 
-# arm.set_servo_angle(angle=[-45, 90, -180, 0, 90, 0], speed=speed, wait=True)
+# arm.set_servo_angle(angle=[0, 0, -20, 0, 0, 0], speed=speed, wait=True)
 # print(arm.get_servo_angle())
 # # print(arm.get_servo_angle(), arm.get_servo_angle(is_radian=True))
 
@@ -56,10 +56,20 @@ speed = 50
 print()
 PrintPosition()
 
-# arm.set_position(x=500,y=-100,z=500,speed=speed,wait=True)
-# print(arm.get_position())
-# arm.set_position(roll=-170,speed=speed,wait=True)
-# print(arm.get_position())
+# arm.set_position(x=280, y=100, z=110, roll=180, pitch=0, yaw=0,speed=speed, wait=True)
+
+Z_Up = 110
+Z_Down = 95
+# X = 260
+
+# arm.set_position(x=265, y=100, z=Z_Up, roll=180, pitch=0, yaw=0,speed=speed, wait=True)
+
+for X in range(225,265,3):
+    for Y in range(-80,100,5):
+        arm.set_position(x=X, y=Y, z=Z_Up, roll=180, pitch=0, yaw=0,speed=speed, wait=False)
+        arm.set_position(x=X, y=Y, z=Z_Down, roll=180, pitch=0, yaw=0,speed=speed, wait=False)
+        arm.set_position(x=X, y=Y, z=Z_Up, roll=180, pitch=0, yaw=0,speed=speed, wait=False)
+        PrintPosition()
 
 # arm.reset(wait=True) # Sets back to home position
 arm.disconnect()
